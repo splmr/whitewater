@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var threshold = 10;
     var speed = 0.05;
 
-    var trailLength = 100; // Length of the trail
+    var trailLength = 75; // Length of the trail
     var trailPoints = []; // Array to store trail points
     var trailOffset = 10; // Offset of the trail above the character
 
@@ -17,24 +17,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
     game.addEventListener("mousemove", function(e) {
         mouseX = e.clientX;
-        
+
         var currentDirection = mouseX > player.offsetLeft + playerWidth / 2 ? "right" : "left";
 
         var thresholdFactor = 1.5; // Adjust this factor as needed
-var thresholdRight = threshold * thresholdFactor;
+        var thresholdRight = threshold * thresholdFactor;
 
-// Change skin only when direction changes and movement exceeds threshold
-if (currentDirection !== prevDirection && Math.abs(mouseX - (player.offsetLeft + playerWidth / 2)) > (currentDirection === "right" ? thresholdRight : threshold)) {
-    prevDirection = currentDirection;
-    var skin = currentDirection === "right" ? "Rsurfer" : "Lsurfer";
-    player.style.backgroundImage = "url('assets/" + skin + ".png')";
-}
+        // Change skin only when direction changes and movement exceeds threshold
+        if (currentDirection !== prevDirection && Math.abs(mouseX - (player.offsetLeft + playerWidth / 2)) > (currentDirection === "right" ? thresholdRight : threshold)) {
+            prevDirection = currentDirection;
+            var skin = currentDirection === "right" ? "Rsurfer" : "Lsurfer";
+            player.style.backgroundImage = "url('assets/" + skin + ".png')";
+        }
     });
 
     function updateTrail() {
         // Clear previous trail
         trailContainer.innerHTML = "";
-      
+
         // Draw the trail
         for (var i = 1; i < trailPoints.length; i++) {
             var trailSegment = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -78,7 +78,7 @@ if (currentDirection !== prevDirection && Math.abs(mouseX - (player.offsetLeft +
             newX = game.offsetWidth - playerWidth;
         }
 
-        player.style.left = newX - 10 + "px";
+        player.style.left = newX  + "px";
         player.style.transform = "translate(-50%, -50%) rotate(" + angleDeg + "deg)";
 
         // Store the current player position for drawing the trail
@@ -98,9 +98,50 @@ if (currentDirection !== prevDirection && Math.abs(mouseX - (player.offsetLeft +
         requestAnimationFrame(updatePlayerPosition);
     }
 
+    function createTree() {
+        var tree = document.createElement("div");
+        tree.className = "tree";
+        tree.style.backgroundImage = "url('assets/tree.png')";
+
+        // Randomly position the tree within the game container
+        var randomX = Math.floor(Math.random() * (game.offsetWidth - 50)); // Adjust width of the tree as needed
+        tree.style.left = randomX + "px";
+        tree.style.bottom = "0"; // Start at the bottom of the game container
+
+        game.appendChild(tree);
+
+        return tree;
+    }
+
+    function moveTrees() {
+        var trees = document.querySelectorAll(".tree");
+
+        trees.forEach(function(tree) {
+            var currentBottom = parseInt(tree.style.bottom, 10);
+            var newBottom = currentBottom + speed * 50; // Adjust speed as needed
+
+            tree.style.bottom = newBottom + "px";
+
+            // Remove tree when it goes beyond the top of the game container
+            if (newBottom > game.offsetHeight) {
+                tree.remove();
+            }
+        });
+
+        requestAnimationFrame(moveTrees);
+    }
+
     // Start updating player position
     updatePlayerPosition();
 
     // Start updating the trail
     updateTrail();
+
+    // Start moving trees
+    setInterval(function() {
+        createTree();
+    }, 500); // Adjust interval as needed
+
+    // Start moving trees
+    moveTrees();
 });

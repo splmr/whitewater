@@ -10,10 +10,10 @@ html {
   overflow-y: hidden;
 }
 #trail {
-    position: absolute;
-    width: 100%; /* Full width of the game container */
-    height: 100%; /* Full height of the game container */
-    z-index: 4; /* Ensure the trail is behind the player */
+  position: absolute;
+  width: 100%; /* Full width of the game container */
+  height: 100%; /* Full height of the game container */
+  z-index: 1; /* Ensure the trail is behind the player */
 }
 
 
@@ -37,7 +37,7 @@ html {
   top: 50%;
   left: 50%; /* Center horizontally */
   transform: translateX(-50%); /* Center horizontally */
-  z-index: 5;
+  z-index: 3;
 }
 #logo {
   position: fixed;
@@ -60,10 +60,19 @@ html {
   left: 0;
   width: 100%;
   height: 200%; /* Double the height of the game container to ensure continuous movement */
-  background-image: url("assets/WHITE (2).pngpng");
+  background-image: url("assets/WHITE (2).png");
   background-size: cover;
 
   
+}
+.tree {
+  width: 50px; /* Adjust width as needed */
+  height: 80px; /* Adjust height as needed */
+  background-image: url('assets/tree.png');
+  background-size: cover; /* Ensure the image fits within the dimensions */
+  position: absolute; /* Position the tree elements */
+  bottom: 0; /* Start at the bottom of the game container */
+  z-index: 6; /* Ensure the trees appear above the background */
 }
 .upwards{
     animation: moveBackground 20s linear infinite; /* Adjust duration as needed */
