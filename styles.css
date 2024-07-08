@@ -16,7 +16,6 @@ html {
   z-index: 1; /* Ensure the trail is behind the player */
 }
 
-
 #game {
   position: relative;
   width: 100%;
@@ -39,6 +38,45 @@ html {
   transform: translateX(-50%); /* Center horizontally */
   z-index: 3;
 }
+#timer {
+  position: fixed;
+  top: 20px;
+  left: 40%;
+  transform: translateX(-50%);
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  font-size: 12px;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  z-index: 8;
+  padding: 10px;
+}
+#game-controls {
+  position: fixed;
+  top: 20px;
+  left: 80%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0);
+  color: white;
+  font-size: 14px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  z-index: 8;
+  padding: 10px;
+ 
+  text-align: center;
+  max-width: 300px;
+}
+#nearmiss {
+  position: fixed;
+  top: 20px;
+  left: 60%;
+  transform: translateX(-50%);
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  font-size: 12px;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  z-index: 8;
+  padding: 10px;
+}
 #logo {
   position: fixed;
   width: 350px; /* Fixed width */
@@ -46,7 +84,7 @@ html {
   top: 0%;
   left: 0%; /* Center horizontally */
 
-  z-index: 5;
+  z-index: 100;
 }
 @media (max-width: 600px) {
   #player {
@@ -62,20 +100,33 @@ html {
   height: 200%; /* Double the height of the game container to ensure continuous movement */
   background-image: url("assets/WHITE (2).png");
   background-size: cover;
-
-  
+}
+#overlay {
+  position: fixed                                                   ;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 140%;
+  background-image: url("assets/PAUSE.png");
+  background-size: contain; /* Fit image inside the overlay */
+  background-repeat: no-repeat; /* Prevent image from repeating */
+  background-position: top; /* Center the image */
+  z-index: 101;
+  opacity: 0; /* Initially hidden */
+  pointer-events: none; /* Ensure the overlay does not intercept mouse events */
+  transition: 1s;
 }
 .tree {
   width: 50px; /* Adjust width as needed */
   height: 80px; /* Adjust height as needed */
-  background-image: url('assets/tree.png');
+  background-image: url("assets/tree.png");
   background-size: cover; /* Ensure the image fits within the dimensions */
   position: absolute; /* Position the tree elements */
   bottom: 0; /* Start at the bottom of the game container */
   z-index: 6; /* Ensure the trees appear above the background */
 }
-.upwards{
-    animation: moveBackground 20s linear infinite; /* Adjust duration as needed */
+.upwards {
+  animation: moveBackground 20s linear infinite; /* Adjust duration as needed */
 }
 @keyframes moveBackground {
   0% {
