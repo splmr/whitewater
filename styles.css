@@ -74,12 +74,13 @@ html {
   font-family: Georgia, 'Times New Roman', Times, serif;
   z-index: 8;
   padding: 10px;
- 
+  user-select: none; /* Standard syntax */
   text-align: center;
   max-width: 300px;
   opacity: 60%;
 }
 #nearmiss {
+  user-select: none; /* Standard syntax */
   position: fixed;
   top: 20px;
   left: 60%;
@@ -93,6 +94,7 @@ html {
   opacity: 90%;
 }
 #speed {
+  user-select: none; /* Standard syntax */
   position: fixed;
   top: 60px;
   left: 60%;
@@ -106,6 +108,7 @@ html {
   opacity: 90%;
 }
 #altitude {
+  user-select: none; /* Standard syntax */
   position: fixed;
   top: 100px;
   left: 60%;
@@ -124,7 +127,7 @@ html {
   height: 350px; /* Fixed height */
   top: 0%;
   left: 0%; /* Center horizontally */
-
+  opacity: 80%;
   z-index: 100;
 }
 @media (max-width: 600px) {
